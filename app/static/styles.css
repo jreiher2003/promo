@@ -1,0 +1,86 @@
+html,
+body {
+  height: 100%;
+}
+#wrap {
+  min-height: 35%;
+  height: auto;
+  margin: 0 auto -20px;
+  padding: 0 0 20px;
+}
+h1,h2,h3,h4,p {
+    color: #061922;
+}
+nav, footer {
+    background-color: #0B162A;
+    color: #C83803;
+}
+a, pre, nav a, h2, u {
+    color: #C83803;
+    -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  /* ...and now for the proper property */
+  transition:.5s;
+}
+a:hover, nav a:hover {
+    color: #0B162A;
+}
+footer p {
+    padding: 45px 0 20px 0;
+    color: #C83803;
+}
+.bg-thumb p, a span {
+    color: #0B162A;
+}
+.front-button {
+    color: #fff;
+    background-color: #C83803;
+}
+ img, pre, .thumbnail {
+    border: 1px solid #0B162A;
+ }
+ .blue {
+    background-color: #061922;
+    color: #fff;
+ }
+ .blue:hover, a span:hover {
+    color: #C83803;
+ }
+ .delete {
+    margin-bottom: 180px;
+ }
+ a.navbar-brand:hover {
+    color: #C83803;
+ }
+ span.icon-bar {
+  background-color: #C83803;
+}
+.showart {
+  border: 1px solid #0B162A;
+}
+.justart {
+  overflow-y: scroll;
+  min-height: 400px;
+  max-height: 400px;
+  background-color: white;
+}
+.signup-button {
+  background-color: #C83803;
+  color: #fff;
+  border: 1px solid #0B162A;
+  font-size: 20px;
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  /* ...and now for the proper property */
+  transition:.5s;
+}
+.signup-button:hover {
+  background-color: #0B162A;
+  border: 1px solid #C83803;
+  color: #fff;
+
+}

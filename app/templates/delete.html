@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Delete{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">You sure you want to delete <u>{{ delete_artwork.title }}</u>?</h1>
+            <form method="post" action="" class="delete text-center">
+                <input class="btn front-button" type="submit" value="Delete Item">
+                <a class="btn blue" href="/">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="wrap"></div>
+{% endblock %}

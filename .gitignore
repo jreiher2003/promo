@@ -1,0 +1,6 @@
+*.pyc
+*.db
+*.bat
+coverage/
+venv/
+commands.txt

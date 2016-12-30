@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}api-usage{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <blockquote>
+            <p class="h2">This page was made to show that I can create and use api's.</p>
+            <p>I created an API on this <a href="http://adopt-puppy.herokuapp.com/shelters/.json" target="_blank">site</a> and I have used it down below. Try it out go <a href="http://adopt-puppy.herokuapp.com/new-shelter" target="_blank">here</a> and add a shelter, then come back to this page and see it show up.</p>
+            </blockquote>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+<hr>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <ul class="list-unstyled">
+                <p class="h4">Shelters from <a href="http://adopt-puppy.herokuapp.com/" target="_blank">http://adopt-puppy.herokuapp.com/</a></p>
+                {% for key, value in shelters.items() %}
+                    {#{{ key }} {{ value }}#}
+                    {% for v in value %}
+                        <li>{{ v['name'] }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+<hr>
+</div>
+<br>
+{% endblock %}

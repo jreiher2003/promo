@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}trip planner{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-inline text-center" id="form-container">
+                <div class="form-group">
+                    <label for="street" class="sr-only">Street</label>
+                    <input type="text" id="street" name="street" class="form-control" placeholder="Enter a street address...">
+                </div>
+                <div class="form-group">
+                    <label for="city" class="sr-only">City</label>
+                    <input type="text" name="city" id="city" class="form-control" placeholder="Enter a city...">
+                </div>
+                <div class="form-group">
+                    <label for="state" class="sr-only">State</label>
+                    <input type="text" name="state" id="state" class="form-control" placeholder="Enter a state...">
+                </div>
+                <input type="submit" class="btn front-button" value="Search">
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="body"></div>
+            <h3 id="greeting" class="greeting text-center">Where do you want to live?</h3>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-8 text-center">
+            <h3 id="nytimes-header center-block">New York Times Articles</h3>
+            <ul class="list-unstyled" id="nytimes-articles"> Whats's going on in your new city?  Enter an address and hit submit and the NY Times will tell you here!</ul>
+        </div>
+        <div class="col-md-4">
+            <h3 id="wikipedia-header">Relevant Wikipedia Links</h3>
+            <ul id="wikipedia-links">Type in an address above and find relevant Wikipedia articles here!</ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
