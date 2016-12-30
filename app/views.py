@@ -206,3 +206,7 @@ def logout():
     logout_user()
     flash("You just successfully logged out", "danger")
     return redirect(url_for('signup'))
+
+@app.route("/tos")
+def tos():
+    return render_template("termsofservice.html")

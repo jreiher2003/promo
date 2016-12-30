@@ -27,10 +27,18 @@ a, pre, nav a, h2, u {
 a:hover, nav a:hover {
     color: #0B162A;
 }
+footer > div > p > a:hover,
 footer p {
-    padding: 45px 0 20px 0;
+    /*padding: 45px 0 20px 0;*/
     color: #C83803;
 }
+footer p.copyright {
+  padding-top: 40px;
+}
+footer p.tos {
+  padding-bottom: 40px;
+}
+
 .bg-thumb p, a span {
     color: #0B162A;
 }
