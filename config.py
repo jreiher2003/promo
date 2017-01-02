@@ -6,6 +6,19 @@ class BaseConfig(object):
     SQLALCHEMY_DATABASE_URI = os.environ["DATABASE_URL"]
     SECRET_KEY = os.environ["SECRET_KEY"]
     CACHE_TYPE = "memcached"
+    MAIL_SERVER = "smtp.gmail.com"
+    MAIL_PORT = 465
+    # MAIL_SERVER = "mail.asciichan-tripplannr.com"
+    # MAIL_PORT = 25
+    MAIL_USE_SSL = True
+    MAIL_USE_TLS = False
+    MAIL_USERNAME = os.environ["MAIL_USERNAME"]
+    MAIL_PASSWORD = os.environ["MAIL_PASSWORD"]
+    MAIL_DEFAULT_SENDER = '"Jeff" <jeffreiher@gmail.com>'
+    # MAIL_DEFAULT_SENDER = '"Promo" <promo@asciichan-tripplannr.com>'
+    SECURITY_UNAUTHORIZED_VIEW = "/login/"
+    SECURITY_MSG_UNAUTHORIZED = ("Try loging in first", "danger")
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 class TestConfig(BaseConfig):
     DEBUG = True
@@ -16,6 +29,8 @@ class TestConfig(BaseConfig):
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
+    UPLOADED_PHOTOS_DEST = "/vagrant/app/static/img"
     
 class ProductionConfig(BaseConfig):
     DEBUG = False
+    UPLOADED_PHOTOS_DEST = "/var/www/promo/img"

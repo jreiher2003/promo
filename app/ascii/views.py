@@ -5,6 +5,7 @@ import logging
 from app import app, db, cache, bcrypt # pragma: no cover
 from flask import render_template, request, url_for, redirect, flash, abort, Blueprint # pragma: no cover
 from flask_login import current_user, login_required
+
 from app.users.models import Users
 from app.ascii.models import AsciiArt # pragma: no cover
 from app.ascii.forms import AsciiForm # pragma: no cover

@@ -8,8 +8,8 @@
             <form method="post" action="">
                 {{ form.csrf_token }}
                 <div class="form-group">
-                    {{ form.username.label(class="sr-only") }}
-                    {{ form.username(class="form-control input-lg", placeholder="username or email address...") }}
+                    {{ form.email.label(class="sr-only") }}
+                    {{ form.email(class="form-control input-lg", placeholder="email address...") }}
                 </div>
                 <div class="form-group">
                     {{ form.password.label(class="sr-only") }}
