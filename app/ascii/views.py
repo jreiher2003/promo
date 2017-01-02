@@ -1,13 +1,15 @@
-import datetime # pragma: no cover
 import urllib2 # pragma: no cover
 import requests # pragma: no cover
 import json # pragma: no cover
 import logging
 from app import app, db, cache, bcrypt # pragma: no cover
-from app.models import AsciiArt, Users # pragma: no cover
-from app.forms import AsciiForm, LoginForm, RegistrationForm # pragma: no cover
-from flask import render_template, request, url_for, redirect, flash, abort # pragma: no cover
-from flask_login import login_user, logout_user, login_required, current_user
+from flask import render_template, request, url_for, redirect, flash, abort, Blueprint # pragma: no cover
+from flask_login import current_user, login_required
+from app.users.models import Users
+from app.ascii.models import AsciiArt # pragma: no cover
+from app.ascii.forms import AsciiForm # pragma: no cover
+
+ascii_blueprint = Blueprint("ascii", __name__, template_folder="templates")
 
 def get_ip():
     headers_list = request.headers.getlist("X-Forwarded-For")
@@ -39,13 +41,11 @@ def get_coords(ip):
     else:
         return None
 
-
 def gmaps_img(points):
     GMAPS_URL = "https://maps.googleapis.com/maps/api/staticmap?size=550x400&zoom=3&sensor=false&key=AIzaSyDOnmHKt4bMXj-QL8pKeHd4yCyTL8-IzUc"
     for lat, lon in points:
         GMAPS_URL += '&markers=%s,%s' % (lat, lon)
     return GMAPS_URL
-
 
 def top_arts(update=False):
     key = "top"
@@ -67,8 +67,7 @@ def top_users(update=False):
         cache.set(key, all_users)
     return all_users 
 
-
-@app.route("/ascii", methods=["GET","POST"])
+@ascii_blueprint.route("/ascii", methods=["GET","POST"])
 @login_required
 def hello():
     all_art = top_arts()
@@ -101,8 +100,7 @@ def hello():
         form=form, 
         error=error)
 
-
-@app.route("/<int:art_id>/edit", methods=["GET","POST"])
+@ascii_blueprint.route("/<int:art_id>/edit", methods=["GET","POST"])
 @login_required
 def edit_art(art_id):
     all_art = top_arts()
@@ -132,8 +130,7 @@ def edit_art(art_id):
         all_users=all_users, 
         img_url=img_url)
 
-
-@app.route("/<int:art_id>/delete", methods=["GET","POST"])
+@ascii_blueprint.route("/<int:art_id>/delete", methods=["GET","POST"])
 @login_required
 def delete_art(art_id):
     delete_artwork = AsciiArt.query.filter_by(id=art_id).one()
@@ -148,14 +145,12 @@ def delete_art(art_id):
     return render_template("delete.html", 
         delete_artwork=delete_artwork)
 
-
-@app.route("/ajax", methods=["GET","POST"])
+@ascii_blueprint.route("/ajax", methods=["GET","POST"])
 @login_required
 def ajax():    
     return render_template("ajax.html")
 
-
-@app.route("/puppy-api-example", methods=["GET", "POST"])
+@ascii_blueprint.route("/puppy-api-example", methods=["GET", "POST"])
 @login_required
 def pup_api():
     url = "http://adopt-puppy.herokuapp.com/shelters/.json"
@@ -163,50 +158,6 @@ def pup_api():
     shelters = response.json()
     return render_template("pup-api.html", shelters=shelters)
 
-@app.route("/login", methods=["GET","POST"])
-def login():
-    error = None
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = Users.query.filter_by(username=form.username.data).first()
-        remember_me = form.remember_me.data
-        if user is not None and bcrypt.check_password_hash(user.password,form.password.data):
-            login_user(user, remember=remember_me)
-            flash("You just logged in as %s!" % user.username, "success")
-            return redirect(url_for('hello'))
-        else:
-            flash("<strong>Invalid password.</strong> Please try again.", "danger")
-            return redirect(url_for("login"))
-    return render_template("login.html", form=form, error=error)
-            
-
-@app.route("/", methods=["GET","POST"])
-def signup():
-    error = None
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        user = Users(
-            username=form.username.data,
-            password=bcrypt.generate_password_hash(form.password.data)
-            )
-        try:
-            db.session.add(user)
-            db.session.commit()
-            login_user(user)
-            flash("You have just signup up congrats!", "success")
-            return redirect(url_for("hello"))
-        except:
-            flash("That username already exists", "danger")
-            return redirect(url_for("signup"))
-    return render_template("signup.html", form=form, error=error)
-
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    flash("You just successfully logged out", "danger")
-    return redirect(url_for('signup'))
-
-@app.route("/tos")
+@ascii_blueprint.route("/tos")
 def tos():
     return render_template("termsofservice.html")

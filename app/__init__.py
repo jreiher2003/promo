@@ -13,14 +13,17 @@ cache = Cache(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 
+from app.users.views import users_blueprint
+app.register_blueprint(users_blueprint)
+from app.ascii.views import ascii_blueprint
+app.register_blueprint(ascii_blueprint)
+
+from app.users.models import Users 
+from app.ascii.models import AsciiArt
 
 login_manager.login_view = 'login'
 login_manager.login_message = "You have to login first"
 login_manager.login_message_category = "info"
-
-from app import views, models
-from models import * 
-
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.filter(Users.id == int(user_id)).one() 

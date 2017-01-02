@@ -4,7 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <h2 class="text-center">Login</h2>
+            <h2 class="text-center">Sign up</h2>
+            <hr>
+            <h4 class="text-center">Sign up to receive internet best offers</h4>
             <form method="post" action="">
                 {{ form.csrf_token }}
                 <div class="form-group">
@@ -16,18 +18,20 @@
                     {{ form.password(class="form-control input-lg", placeholder="choose a password...") }}
                 </div>
                 <div class="form-group">
-                    {{ form.remember_me }} {{ form.remember_me.label }}
+                    {{ form.confirm.label(class="sr-only") }}
+                    {{ form.confirm(class="form-control input-lg", placeholder="confirm password...") }}
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Login" class="form-control input-lg signup-button">
+                    {{ form.accept_tos }} {{ form.accept_tos.label }}
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="form-control input-lg signup-button">
                 </div>
             </form>
             <br><br>
-            <p>don't have an account yet?  <a href="{{ url_for('signup') }}">&nbsp;register here</p>
+            <p>already have an account?  <a href="{{ url_for('users.login') }}">login here</p>
             <hr>
         </div>
     </div>
 </div>
-
-
 {% endblock %}
