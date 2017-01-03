@@ -1,36 +1,40 @@
 {% extends "base.html" %}
 {% block title %}trip planner{% endblock %}
 {% block content %}
+{% from "_macros.html" import render_field_with_errors, render_field %}
+
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <h2 class="text-center">Sign up</h2>
-            <hr>
-            <h4 class="text-center">Sign up to receive Internet's best offers</h4>
-            <form method="post" action="">
-                {{ form.csrf_token }}
-                <div class="form-group">
-                    {{ form.email.label(class="sr-only") }}
-                    {{ form.email(class="form-control input-lg", placeholder="email address...") }}
-                </div>
-                <div class="form-group">
-                    {{ form.password.label(class="sr-only") }}
-                    {{ form.password(class="form-control input-lg", placeholder="choose a password...") }}
-                </div>
-                <div class="form-group">
-                    {{ form.confirm.label(class="sr-only") }}
-                    {{ form.confirm(class="form-control input-lg", placeholder="confirm password...") }}
-                </div>
-                <div class="form-group">
-                    {{ form.accept_tos }} {{ form.accept_tos.label }}
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="form-control input-lg signup-button">
-                </div>
-            </form>
-            <br><br>
-            <p>already have an account?  <a href="{{ url_for('users.login') }}">login here</p>
-            <hr>
+        <div class="col-md-6 col-md-offset-3">
+            <div class="signup-border">
+                <h2 class="text-center">Sign up</h2>
+                <hr>
+                <h4 class="text-center">Sign up to receive Internet's best offers</h4>
+                <form method="post" action="">
+                    {{ form.csrf_token }}
+                    <div class="form-group">
+                        {{ form.email.label(class="sr-only") }}
+                        {{ render_field_with_errors(form.email, class="form-control input-lg", placeholder="email address...") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(class="sr-only") }}
+                        {{ render_field_with_errors(form.password, class="form-control input-lg", placeholder="choose a password...") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.confirm.label(class="sr-only") }}
+                        {{ render_field_with_errors(form.confirm, class="form-control input-lg", placeholder="confirm password...") }}
+                    </div>
+                    <div class="form-group">
+                         {{ render_field_with_errors(form.accept_tos,class="pull-left") }}&nbsp;{{ form.accept_tos.label }}&nbsp;<small class="text-muted"><a href="{{ url_for('promo.tos') }}" onClick="return popup(this, 'notes')">(Click to Read)</a></small>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="form-control input-lg signup-button">
+                    </div>
+                </form>
+                <br><br>
+                <p>already have an account?  <a href="{{ url_for('users.login') }}">login here</p>
+                <hr>
+            </div>
         </div>
     </div>
 </div>

@@ -50,16 +50,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                {% for category, message in messages %}
-                <div class="alert alert-{{ category }} alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    {{ message | safe }}
-                </div>  
-                {% endfor %}
-                {% endif %}
-            {% endwith %}
+            {% include "message_flashes.html" %}
         </div>
     </div>
 </div><!-- end container -->
@@ -68,13 +59,16 @@
 <footer>
     <div class="container">
         <p class="text-center copyright"><a href="#">Copyright &#169; asciichan-tripplannr.com 2016</a></p>
-        <p class="text-center"><a href="#">Private Policy</a></p>
-        <p class="text-center tos"><a href="{{ url_for('ascii.tos') }}">Terms of Service</a></p>
+        <p class="text-center"><a href="{{ url_for('promo.private_policy') }}">Private Policy</a></p>
+        <p class="text-center tos"><a href="{{ url_for('promo.tos') }}">Terms of Service</a></p>
     </div>
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script TYPE="text/javascript"> function popup(mylink, windowname) { if (! window.focus)return true; var href; if (typeof(mylink) == 'string') href=mylink; else href=mylink.href; window.open(href, windowname, 'width=700,height=400,scrollbars=yes'); return false; } </script>
+
+Read more: http://html.com/javascript/popup-windows/#ixzz4UiAgjIs5
 </body>
 </html>

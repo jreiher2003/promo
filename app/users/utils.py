@@ -1,3 +1,5 @@
+import random
+from string import hexdigits
 from app import app, mail
 from flask import request, url_for, render_template
 from itsdangerous import URLSafeTimedSerializer 
@@ -21,18 +23,18 @@ def make_salt(length=10):
     return "".join(random.choice(hexdigits) for x in xrange(length))
 
 def generate_confirmation_token(email):
-    t_salt = make_salt()
-    seializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
-    return seializer.dump(email, salt=t_salt)
+    t_salt = "thdfsfwewewrwrwjsljfalii3333"
+    serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+    return serializer.dumps(email, salt=t_salt)
 
 def confirm_token(token, expriation=3600):
-    t_salt = make_salt() 
+    t_salt = "thdfsfwewewrwrwjsljfalii3333"
     serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
     try:
         email = serializer.loads(token, salt=t_salt, max_age=expriation)
     except:
         return False
-    return email 
+    return email
 
 def send_email(to, subject, template):
     msg = Message(subject, recipients=[to], html=template, sender=app.config["MAIL_DEFAULT_SENDER"])

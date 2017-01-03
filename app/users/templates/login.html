@@ -1,30 +1,35 @@
 {% extends "base.html" %}
 {% block title %}trip planner{% endblock %}
 {% block content %}
+{% from "_macros.html" import render_field_with_errors, render_field %}
+
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <h2 class="text-center">Login</h2>
-            <form method="post" action="">
-                {{ form.csrf_token }}
-                <div class="form-group">
-                    {{ form.email.label(class="sr-only") }}
-                    {{ form.email(class="form-control input-lg", placeholder="email address...") }}
-                </div>
-                <div class="form-group">
-                    {{ form.password.label(class="sr-only") }}
-                    {{ form.password(class="form-control input-lg", placeholder="choose a password...") }}
-                </div>
-                <div class="form-group">
-                    {{ form.remember_me }} {{ form.remember_me.label }}
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Login" class="form-control input-lg signup-button">
-                </div>
-            </form>
-            <br><br>
-            <p>don't have an account yet?  <a href="{{ url_for('users.signup') }}">&nbsp;register here</p>
-            <hr>
+            <div class="signup-border">
+                <h2 class="text-center">Login</h2>
+                <form method="post" action="{{ url_for('users.login') }}">
+                    {{ form.csrf_token }}
+                    <div class="form-group">
+                        {{ form.email.label(class="sr-only") }}
+                        {{ render_field_with_errors(form.email, class="form-control input-lg", placeholder="email address...") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(class="sr-only") }}
+                        {{ render_field_with_errors(form.password, class="form-control input-lg", placeholder="password...") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.remember_me }} {{ form.remember_me.label }}
+                        <li class="pull-right"><a href="{{ url_for('users.forgot_password') }}">Forgot password</a><br/></li>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="form-control input-lg signup-button">
+                    </div>
+                </form>
+                <br><br>
+                <p><small class="text-muted">don't have an account yet?</small>  <a href="{{ url_for('users.signup') }}">&nbsp;register here</p>
+                <hr>
+            </div>
         </div>
     </div>
 </div>

@@ -159,6 +159,3 @@ def pup_api():
     shelters = response.json()
     return render_template("pup-api.html", shelters=shelters)
 
-@ascii_blueprint.route("/tos")
-def tos():
-    return render_template("termsofservice.html")
