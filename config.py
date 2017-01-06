@@ -8,14 +8,14 @@ class BaseConfig(object):
     CACHE_TYPE = "memcached"
     MAIL_SERVER = "smtp.gmail.com"
     MAIL_PORT = 465
+    # MAIL_DEFAULT_SENDER = '"Jeff" <jeffreiher@gmail.com>'
     # MAIL_SERVER = "mail.asciichan-tripplannr.com"
-    # MAIL_PORT = 25
+    # MAIL_PORT = 587
     MAIL_USE_SSL = True
     MAIL_USE_TLS = False
     MAIL_USERNAME = os.environ["MAIL_USERNAME"]
     MAIL_PASSWORD = os.environ["MAIL_PASSWORD"]
-    MAIL_DEFAULT_SENDER = '"Jeff" <jeffreiher@gmail.com>'
-    # MAIL_DEFAULT_SENDER = '"Promo" <promo@asciichan-tripplannr.com>'
+    MAIL_DEFAULT_SENDER = '"Promo" <email@asciichan-tripplannr.com>'
     SECURITY_UNAUTHORIZED_VIEW = "/login/"
     SECURITY_MSG_UNAUTHORIZED = ("Try loging in first", "danger")
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
