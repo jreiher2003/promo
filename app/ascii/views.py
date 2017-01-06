@@ -5,6 +5,7 @@ import logging
 from app import app, db, cache, bcrypt # pragma: no cover
 from flask import render_template, request, url_for, redirect, flash, abort, Blueprint # pragma: no cover
 from flask_login import current_user, login_required
+
 from app.users.models import Users
 from app.ascii.models import AsciiArt # pragma: no cover
 from app.ascii.forms import AsciiForm # pragma: no cover
@@ -158,6 +159,3 @@ def pup_api():
     shelters = response.json()
     return render_template("pup-api.html", shelters=shelters)
 
-@ascii_blueprint.route("/tos")
-def tos():
-    return render_template("termsofservice.html")
